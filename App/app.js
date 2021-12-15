@@ -1,6 +1,6 @@
 "use strict";
 
-// Planet doctor classes are used in the application layer 
+// student support classes are used in the application layer 
 const studentsupport = require("../studentsupport.js");
 
 // Establishing communication between the application layer and the data layer
@@ -18,33 +18,33 @@ app.use(express.json());
 // Location of the static files are added 
 app.use(express.static("Static")); // s=S
 
-// This is the start for patient endpoints
+// This is the start for student endpoints
 
-// This code will add /patients endpoint
+// This code will add /students endpoint
 app.get("/students", function(req, res) {
-  // This code will return all patients from the patients table 
+  // This code will return all students from the students table 
   data.getStudents(function(students) {
       res.json(students);
   });
 });
 
-// Add /patients post endpoint
+// Add /students post endpoint
 app.post("/students", function(req, res) {
-// Call createPatient on data
+// Call createStudent on data
   data.addStudent(req.body, function() {
     res.send("OK");
   });
 });
 
-// This code will add a single /patient endpoint
+// This code will add a single /student endpoint
 app.get("/student/:code", function(req, res) {
-  // This code will return a single patient from the patients table 
+  // This code will return a single student from the students table 
   data.getStudent(req.params.code, function(student) {
       res.json(student);
   });
 });
 
-// This code will update a single /patient endpoint
+// This code will update a single /student endpoint
 app.put("/student/:code", function(req, res) {
   data.updateStudent(req.body, function() {
       res.send("OK");
@@ -52,10 +52,10 @@ app.put("/student/:code", function(req, res) {
 });
 
 
-//Asking the data layer to remove a patient
-// Add a /patient delete endpoint
+//Asking the data layer to remove a student
+// Add a /student delete endpoint
 app.delete("/student/:Student_ID", function(req, res) {
-  // This will call deletePatient on the data
+  // This will call deleteStudent on the data
   data.deleteStudent(req.params.Student_ID, function() {
     // After successful deletion there will be an OK response to the browser
     res.send("OK");
@@ -69,38 +69,38 @@ app.put("/students", function(req, res) {
   });
 });
 
-// Patient endpoints stop here
+// Student endpoints stop here
 
-// This is the start for doctor endpoints
+// This is the start for lecturer endpoints
 
-//This code will Add /doctors endpoint
+//This code will Add /lecturers endpoint
 app.get("/lecturers" , function(req, res) {
-  // This code will return "all doctors" from the doctors table 
+  // This code will return "all lecturers" from the lecturers table 
   data.getLecturers(function(lecturers) {
     res.json(lecturers);
   });
 });
 
 
-// Add /doctors post endpoint
+// Add /lectuerers post endpoint
 app.post("/lecturers", function(req, res) {
-  // Call addDoctor on data
+  // Call addLecturer on data
   data.addLecturer(req.body, function() {
     res.send("OK");
   });
 });
 
-// This is the code for Adding a single /doctor endpoint
+// This is the code for Adding a single /lecturer endpoint
 app.get("/lecturer/:doc", function(req, res) {
-  // This code will Call getDoctor on data
+  // This code will Call getLecturer on data
   data.getLecturer(req.params.doc, function(doc) {
       res.json(doc);
   });
 });
 //Asking the data layer to remove a doctors availability
-// Add a /doctor delete endpoint
+// Add a /lecturer delete endpoint
 app.delete("/lecturer/:Lecturer_ID", function(req, res) {
-  // This will call deleteDoctor on the data
+  // This will call deleteLecturer on the data
   data.deleteLecturer(req.params.Lecturer_ID, function() {
     // After successful deletion there will be an OK response to the browser
     res.send("OK");
@@ -117,120 +117,8 @@ app.put("/lecturers", function(req, res) {
 
 
 
-// Doctor endpoints stop here
+// Lecturer endpoints stop here
 
-// Diagnostics endpoints start here
-
-  // This code will add /diagnostics endpoint to the front end
-  app.get("/diagnostics", function(req, res) {
-    // This code will return the endpoint to the frontend
-    data.getDiagnostics(function(diagnostics) {
-    res.json(diagnostics);
-  });
-});
-
-// This code will add /diagnostics endpoint
-app.get("/diagnostic/:code", function(req, res) {
-  console.log('in app.js get diagnostic req:', req.params)
-  // This code will call getDiagnostics on data
-  console.log('in app.js get diagnostic req.params.code:',req.params.code)
-  data.getDiagnostic(req.params.code, function(diagnostic) {
-      res.json(diagnostic);
-  });
-});
-
-// This code will add /diagnostic delete endpoint
-app.delete("/diagnostic/:Drug_ID", function(req, res) {
-  data.deleteDiagnostic(req.params.Drug_ID, function() {
-    res.send("OK");
-  });
-});
-
-app.post("/diagnostics", function(req, res){
-  data.addDiagnostic(req.body,function(){
-    res.send("OK");
-  });
-});
-
-app.put("/diagnostic/:Drug_ID", function(req, res) {
-  data.alterDiagnostic(req.body, function() {
-    res.send("OK");
-  });
-});
-
-// Diagnostics endpoints stop here
-
-// This code is adding prescriptions endpoint to the front end
-app.get("/prescriptions", function(req, res) {
-  // Call getPrescriptons on data
-  data.getPrescriptions(function(prescriptions) {
-      res.json(prescriptions);
-    });
-});
-
-// Add /Prescription endpoint
-app.get("/prescription/:code", function(req, res) {
-  // This code will call prescriptions on data
-  data.getPrescription(req.params.code, function(prescription) {
-      res.json(prescription);
-  });
-}); 
-app.post("/prescriptions", function(req,res){
-  //call addprescription on data 
-  data.addPrescription(req.body, function(){
-    res.send("OK");
-  });
-}); 
-// This code will update a single /prescription endpoint
-app.put("/prescriptions/:code", function(req, res) {
-  data.updatePrescriptions(req.body, function() {
-      res.send("OK");
-  });
-});
-
-
-//This code is adding volunteers endpoint to the front end
-app.get("/volunteers", function(req, res) {
-  // Call getVolunteers on data
-  data.getVolunteers(function(volunteers) {
-      res.json(volunteers);
-  });
-});
-
-// Add /volunteer endpoint
-app.get("/volunteer/:code", function(req, res) {
-  // Call getVolunteer on data
-  data.getVolunteer(req.params.code, function(volunteer) {
-    res.json(volunteer);
-  });
-});
-
-
-
-app.post("/volunteers", function(req,res){
-  //call addVolunteer on data 
-  data.addVolunteer(req.body, function(){
-    res.send("OK");
-  });
-});
-
-// Add a /volunteer delete endpoint
-app.delete("/volunteer/:ID", function(req, res) {
-  // This will call deleteVolunteer on the data
-  data.deleteVolunteer(req.params.ID, function() {
-    // After deletion send OK response to the browser
-    res.send("OK");
-  });
-});
-
-// Add a /volunteer alter endpoint
-app.put("/volunteer/:ID", function(req, res) {
-  // This will call alterVolunteer on the data
-  data.alterVolunteer(req.body, function(Volunteer) {
-    // After deletion send OK response to the browser
-    res.send(Volunteer);
-  });
-});
 
 // To start the server
 // This code will allow the application layer to listen communication from the front end on port 3000
