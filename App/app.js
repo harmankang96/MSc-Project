@@ -76,7 +76,7 @@ app.put("/students", function(req, res) {
 //This code will Add /doctors endpoint
 app.get("/lecturers" , function(req, res) {
   // This code will return "all doctors" from the doctors table 
-  data.getDoctors(function(lecturers) {
+  data.getLecturers(function(lecturers) {
     res.json(lecturers);
   });
 });
