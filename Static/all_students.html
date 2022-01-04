@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Diagnostics</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
+        <script src="studentsupport.js"></script>
+        <script src="all_students.js"></script>
+        <link rel="stylesheet" href="data_style.css">
+    </head>
+    <body>
+        
+        <h1>Students Records <i class="fa fa-address-card" aria-hidden="true"> </i>
+        </h1>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" /> 
+
+        <div ng-app="SSApp" ng-controller="studentController">
+            <table class = "customTable">
+                <thead>
+                <tr>
+                    <th>Student_ID</th>
+                    <th>S_First_Name</th>
+                    <th>S_Last_Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Subject</th>
+                </tr>
+            </thead>
+                <tr ng-repeat="student in students">
+                    <td>{{ student.Student_ID }}</td>
+                    <td>{{ student.S_First_Name }}</td>
+                    <td>{{ student.S_Last_Name }}</td>
+                    <td>{{ student.DOB }}</td>
+                    <td>{{ student.Gender }}</td>
+                    <td>{{ student.Subject }}</td>    
+                    <!--<td><input type="button" ng-click="selectStudent(student.Student_ID)" value="Select"></td>-->
+                    <td><input type="button" ng-click="deleteStudent(student.Student_ID)" value="Delete"></td>
+                    <td><input type="button" ng-click="updateStudent(student.Student_ID)" value="Update"></td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="text" ng-model="new_student.Student_ID" placeholder='Student ID'></td>
+                    <td><input type="text" ng-model="new_student.S_First_Name" placeholder='First Name'></td>
+                    <td><input type="text" ng-model="new_student.S_Last_Name" placeholder='Last Name'></td>
+                    <td><input type="text" ng-model="new_student.DOB" placeholder='DOB'></td>
+                    <td><input type="text" ng-model="new_student.Gender" placeholder='Gender'></td>
+                    <td><input type="text" ng-model="new_student.Subject" placeholder='Subject'></td>
+                    <td><input type="button" ng-click="createStudent()" value="Create"></td>
+                </tr>
+            </table> 
+        </div>
+        <a href="index.html" class= "logout" style="color: white; background-color: #248FD6; font: sans-serif; font-weight: 100; font-size: 15px; border: solid #248FD6;
+        border-radius: 2px; padding: 2px 8px; transition-duration: 20ms; text-decoration: none; margin: 90%; margin-top: 300px; position: absolute; top: 10%;">Logout</a>
+        
+        <a href="doc_dashboard.html" class= "dashboard" style="color: white; background-color: #248FD6; font: sans-serif; font-weight: 100; font-size: 15px; border: solid #248FD6;
+        border-radius: 2px; padding: 2px 8px; transition-duration: 0.5ms; text-decoration: none; margin: 80%; margin-top: 300px; position: absolute; top: 10%;">Dashboard</a>
+    </body>
+</html>
