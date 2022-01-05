@@ -1,0 +1,25 @@
+{
+    "name": "studentsupport-db",
+    "version": "1.0.0",
+    "description": "App development",
+    "main": "iha.js",
+    "scripts": {
+      "start": "node iha.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/harmankang96/MSc-Project.git"
+    },
+    "author": "harmankang96",
+    "license": "Apache-2.0",
+    "bugs": {
+      "url": "https://github.com/harmankang96/MSc-Project/issues"
+    },
+    "homepage": "https://github.com/harmankang96/MSc-Project#readme",
+    "dependencies": {
+      "express": "^4.17.1",
+      "sqlite3": "^5.0.2"
+    }
+  }
+  
