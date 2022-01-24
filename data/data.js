@@ -22,8 +22,7 @@ var db = new sqlite3.Database("data/StudentSupport.db", function(err) {
 // This code will export getLecturers function 
 exports.getLecturers = function(callback) {
     // SQL statement for showing all lecturers created
-    var sql = `
-        SELECT * FROM Lecturers`;
+    var sql = `SELECT * FROM lecturers`;
     // To execute the SQL query and the return all lecturers
     db.all(sql, function(err, rows) {
         // This code will check for any errors and if any run the code
@@ -31,13 +30,13 @@ exports.getLecturers = function(callback) {
             return console.error(err.message);
         }
         // Create an array for Lecturers
-        var Lecturers = [];
+        var lecturers = [];
         // This code will Loop through each row  to create Lecturer objects
         for (var row of rows) {
             // To create a lecturer object
-            var doc = new studentsupport.Lecturers(row.Name, row.Lecturer_ID, row.Gender, row.Availability);
+            var lec = new studentsupport.Lecturers(row.Name, row.Lecturer_ID, row.Gender, row.Availability);
             // This code will push each lecturer to the array created above
-            lecturers.push(doc);
+            lecturers.push(lec);
         }
         // callback function will be executed with this code
         callback(lecturers);
@@ -45,11 +44,11 @@ exports.getLecturers = function(callback) {
 };
 
 // This code will export getLecturer function
-exports.getLecturer = function(doc, callback) {
+exports.getLecturer = function(lec, callback) {
     // SQL statement for showing a single lecturer created
     var sql = `
         SELECT * FROM Lecturers
-        WHERE Lecturer_ID = '${doc}'`;
+        WHERE Lecturer_ID = '${lec}'`;
     // The code below will execute the query above and return just a row of data.
     db.get(sql, function(err, row) {
         // To check for errors, this code will be excuted and if any the error msg will be displayed
@@ -57,7 +56,7 @@ exports.getLecturer = function(doc, callback) {
             return console.error(err.message);
         }
         // This code will create a lecturer object
-        var doctor = new studentsupport.Lecturers(row.Name, row.Lecturer_ID, row.Gender, row.Availability);
+        var lecturer = new studentsupport.Lecturers(row.Name, row.Lecturer_ID, row.Gender, row.Availability);
         // After the code above is excuted then this code will return a lecturer
         callback(lecturer);
     });
@@ -98,7 +97,7 @@ exports.addLecturer = function(lecturer, callback) {
 // This code will Export getStudents function
 exports.getStudents = function(callback) {
     // Creating SQL statements for Students and connecting keys
-    var sql =`SELECT * FROM Students`;
+    var sql =`SELECT * FROM students`;
     
     // This code will execute query and return data from Students class
     db.all(sql, function(err, rows) {
@@ -111,9 +110,9 @@ exports.getStudents = function(callback) {
         // This code will loop through rows creating Student objects
         for (var row of rows) {
             // This code will create student object
-            var pat = new studentsupport.Students(row.Student_ID, row.S_First_Name, row.S_Last_Name, row.DOB, row.Gender, row.Subject);
+            var pat = new studentsupport.Students(row.Student_ID, row.S_First_Name, row.S_Last_Name, row.DOB, row.Gender, row.Course);
             // This code will add students to array
-            students.push(pat);
+            students.push(stu);
         }
         // This code will execute callback function
         callback(students);
@@ -121,11 +120,11 @@ exports.getStudents = function(callback) {
 };
 
 //This code will export getStudent function
-exports.getStudent = function(id, callback) {
+exports.getStudent = function(stu, callback) {
     // This code will create SQL statement
     var sql =`
             SELECT * FROM Students
-            WHERE Student_ID ='${id}'
+            WHERE Student_ID ='${stu}'
     `;
     //This code will execute query and only one row
     db.get(sql, function(err, row) {
@@ -134,7 +133,7 @@ exports.getStudent = function(id, callback) {
         }
          
         //This code will create a student object
-        var student = new studentsupport.Students(row.Student_ID, row.S_First_Name, row.S_Last_Name, row.DOB, row.Gender, row.Subject);
+        var student = new studentsupport.Students(row.Student_ID, row.S_First_Name, row.S_Last_Name, row.DOB, row.Gender, row.Course);
         callback(student)
     });
 };
@@ -156,7 +155,7 @@ exports.deleteStudent = function(Student_ID, callback) {
 // Add a student to the database
 exports.addStudent = function(student, callback) {
     // Create SQL insert statement
-    var sql = `INSERT INTO Students VALUES ('${student.Student_ID}', '${student.S_First_Name}','${student.S_Last_Name}','${student.Gender}','${student.DOB}','${student.Subject}')`;
+    var sql = `INSERT INTO Students VALUES ('${student.Student_ID}', '${student.S_First_Name}','${student.S_Last_Name}','${student.Gender}','${student.DOB}','${student.Course}')`;
     // Execute SQL insert statement
     db.exec(sql, function(err) {
       // Once completed, execute callback function
@@ -164,10 +163,11 @@ exports.addStudent = function(student, callback) {
     });
 };
 
-    exports.updateStudent = function(student, callback) {
+    exports.updateStudent = function(students, callback) {
+        console.log('data.js, updateStudent:', students)  
         var sql = `UPDATE Students
-        SET Subject="${student.Subject}"
-        WHERE Student_ID="${student.Student_ID}"`;
+        SET Subject="${students.Subject}"
+        WHERE Student_ID="${students.Student_ID}"`;
         // Execute SQL update statement
         db.exec(sql, function(err) {
           // Once completed, execute callback function
