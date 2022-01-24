@@ -22,7 +22,7 @@
                     <th>S_Last_Name</th>
                     <th>DOB</th>
                     <th>Gender</th>
-                    <th>Subject</th>
+                    <th>Course</th>
                 </tr>
             </thead>
                 <tr ng-repeat="student in students">
@@ -31,7 +31,7 @@
                     <td>{{ student.S_Last_Name }}</td>
                     <td>{{ student.DOB }}</td>
                     <td>{{ student.Gender }}</td>
-                    <td>{{ student.Subject }}</td>    
+                    <td>{{ student.Course }}</td>    
                     <!--<td><input type="button" ng-click="selectStudent(student.Student_ID)" value="Select"></td>-->
                     <td><input type="button" ng-click="deleteStudent(student.Student_ID)" value="Delete"></td>
                     <td><input type="button" ng-click="updateStudent(student.Student_ID)" value="Update"></td>
@@ -43,7 +43,7 @@
                     <td><input type="text" ng-model="new_student.S_Last_Name" placeholder='Last Name'></td>
                     <td><input type="text" ng-model="new_student.DOB" placeholder='DOB'></td>
                     <td><input type="text" ng-model="new_student.Gender" placeholder='Gender'></td>
-                    <td><input type="text" ng-model="new_student.Subject" placeholder='Subject'></td>
+                    <td><input type="text" ng-model="new_student.Course" placeholder='Course'></td>
                     <td><input type="button" ng-click="createStudent()" value="Create"></td>
                 </tr>
             </table> 

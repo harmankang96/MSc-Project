@@ -26,9 +26,9 @@ SSApp.controller("studentController", function($scope, $http) {
     };
 
     //This code will send delete request to the server
-    $scope.deleteStudent = function(code) {
+    $scope.deleteStudent = function(Student_ID) {
         //sending a delete request to the server endpoint
-        $http.delete("/student/" + code).then(function(response) {
+        $http.delete("/student/" + Student_ID).then(function(response) {
             // this code will refresh the students list
             $http.get("/students/").then(function(response) {
                 $scope.students = response.data;
