@@ -76,9 +76,6 @@ include 'db.php';
                           echo mysqli_error($con);
                         }
                       }
-
-
-
                        ?>
 
 

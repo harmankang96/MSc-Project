@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="log_reg_form.css">
     <link rel="stylesheet" href="index.css">
     <a href="login_form.html"></a>
-    <a href="index.html"></a>
+    <a href="index.php"></a>
 </html>
 <body>
     <img src="background.jpg" alt="iha">
